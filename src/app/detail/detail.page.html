@@ -1,0 +1,87 @@
+<ion-header no-border>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+<ion-back-button></ion-back-button>
+</ion-buttons>
+    <ion-title *ngIf="text">
+     {{ text.s_detail_title }} <span style="float: right">#{{ data.id }}</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="data && text">
+
+<b style="padding: 10px 20px"></b>
+
+<ion-card mode="ios" style="background-color: white">
+
+<ion-card-header>
+<ion-card-subtitle>&nbsp;{{ data.date }}</ion-card-subtitle>
+</ion-card-header>
+
+<ion-card-content>
+
+<ion-list lines="none">
+
+<ion-item text-wrap style="font-size: 12px" *ngFor="let item of data.items">
+  <ion-label>{{ item.qty }} {{ item.type }} {{ item.item }}</ion-label>
+  <ion-icon name="restaurant" slot="start" color="danger"></ion-icon>
+</ion-item>
+
+</ion-list>
+
+</ion-card-content>
+</ion-card>
+
+<div class="ion-padding">
+<ion-row style="border-bottom: 1px solid #f9f9f9;padding: 5px 5px">
+<ion-col size="6"><b>{{ text.d_user }}</b></ion-col>
+<ion-col size="6">{{ data.name }}</ion-col>
+</ion-row>
+
+<ion-row style="border-bottom: 1px solid #f9f9f9;padding: 5px 5px">
+<ion-col size="6"><b>{{ text.d_phone }}</b></ion-col>
+<ion-col size="6"><a href="tel:{{ data.phone }}">{{ data.phone }}</a></ion-col>
+</ion-row>
+
+<ion-row style="border-bottom: 1px solid #f9f9f9;padding: 5px 5px">
+<ion-col size="6"><b>{{ text.d_address }}</b></ion-col>
+<ion-col size="6">{{ data.address }}</ion-col>
+</ion-row>
+
+<ion-row style="border-bottom: 1px solid #f9f9f9;padding: 5px 5px">
+<ion-col size="6"><b>{{ text.d_total_amount }}</b></ion-col>
+<ion-col size="6">{{ data.currency }}{{ data.total }}</ion-col>
+</ion-row>
+
+<ion-row style="padding: 5px 5px">
+<ion-col size="6"><b>{{ text.d_pay }}</b></ion-col>
+<ion-col size="6" *ngIf="data.pay == 1">Cash On Delivery</ion-col>
+<ion-col size="6" *ngIf="data.pay != 1">Online Paid</ion-col>
+</ion-row>
+</div>
+
+</ion-content>
+
+<ion-footer no-border *ngIf="text">
+
+<ion-row *ngIf="status == 0">
+
+<ion-col size="6"><ion-button size="block" mode="ios" (click)="presentAlertConfirm(data.id,2)">{{ text.s_cancel_button }}</ion-button></ion-col>
+
+<ion-col size="6"><ion-button size="block" mode="ios" (click)="presentAlertConfirm(data.id,1)" color="success">{{ text.s_confirm_button }}</ion-button></ion-col>
+
+</ion-row>
+
+<ion-row *ngIf="status == 1">
+
+<ion-col size="12"><ion-button size="block" mode="ios" routerLink="/dboy/{{ data.id }}" routerDirection="forward">{{ text.s_assign_button }}</ion-button></ion-col>
+
+</ion-row>
+
+<ion-row *ngIf="status == 4">
+
+<ion-col size="12"><ion-button size="block" mode="ios" (click)="presentAlertConfirm(data.id,5)" color="success">{{ text.d_complete_ride }}</ion-button></ion-col>
+
+</ion-row>
+
+</ion-footer>

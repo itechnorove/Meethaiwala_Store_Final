@@ -1,0 +1,40 @@
+<ion-app dir="{{ dir }}">
+  <ion-split-pane>
+    <ion-menu swipe-gesture="false" type="push" side="end">
+      <ion-header no-border>
+        <ion-toolbar color="primary">
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+      <div style="background-color: #f44336;">
+    <img src="assets/welcome.svg" class="menu_img"><br><br>
+      </div>
+    
+
+        <ion-list lines="none">
+       
+        <ion-list-header>
+          {{ text.menu_title }}
+        </ion-list-header>
+
+           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item [routerDirection]="'forward'" [routerLink]="[p.url]">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+         
+
+        </ion-list>
+
+      </ion-content>
+      <ion-footer>
+            <ion-item><small style="font-size: 9px;">{{ text.menu_footer }}</small></ion-item>
+            </ion-footer>
+    </ion-menu>
+    <ion-router-outlet main dir="{{ dir }}"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

@@ -1,0 +1,37 @@
+<ion-header no-border>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+<ion-back-button></ion-back-button>
+</ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="data">
+
+<div style="background-color:#f44336;height: 200px;margin-top: -2%">
+
+<br>
+<p style="font-size: 30px;font-weight: 700;color:white" align="center">{{ text.s_assign_button }}</p>
+
+</div>
+
+<ion-card mode="ios" style="background-color: white;padding: 10px 10px;margin-top: -10%">
+
+
+<form #form="ngForm" (ngSubmit)="assign(form.value)">
+
+<ion-item>
+<ion-label>Select Delivery Boy</ion-label>
+<ion-select placeholder="Select" ngModel name="dboy" required>
+<ion-select-option value="{{ d.id }}" *ngFor="let d of data">{{ d.name }}</ion-select-option>
+</ion-select>
+</ion-item>
+
+<br><br>
+<ion-button expand="block" mode="ios" type="submit" [disabled]="!form.valid">Assign</ion-button>
+</form>
+
+</ion-card>
+
+</ion-content>
